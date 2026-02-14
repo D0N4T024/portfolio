@@ -1,14 +1,47 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, Linkedin, Github, Send } from "lucide-react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ subject: "", name: "", email: "", message: "" });
+  const [isSending, setIsSending] = useState(false);
+  const [status, setStatus] = useState<null | { type: "success" | "error"; message: string }>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailto = `mailto:donato.machadosantos@gmail.com?subject=Portfolio Contact from ${form.name}&body=${encodeURIComponent(form.message)}%0A%0AFrom: ${form.email}`;
-    window.open(mailto);
+    setStatus(null);
+    setTimeout(() => {
+      setStatus(null);
+    }, 8000);
+    setIsSending(true);
+
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("Missing EmailJS env vars. Check your .env (VITE_EMAILJS_*).");
+      }
+
+      const templateParams = {
+        subject: form.subject,
+        name: form.name,
+        email: form.email,
+        message: form.message,
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, { publicKey });
+
+      setStatus({ type: "success", message: "Message sent successfully. I'll get back to you soon!" });
+      setForm({ subject: "", name: "", email: "", message: "" });
+    } catch (err) {
+      setStatus({ type: "error", message: "Something went wrong sending the message. Please try again." });
+      console.error(err);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -54,6 +87,29 @@ const ContactSection = () => {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
+            
+            {/* 🔔 Alert */}
+            {status && (
+              <div
+                className={`rounded-lg px-4 py-3 text-sm font-medium border transition-all duration-300 ${
+                  status.type === "success"
+                    ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-300"
+                    : "border-red-500/40 bg-red-500/10 text-red-300"
+                }`}
+              >
+                {status.type === "success" ? "✅ Message sent successfully!" : "⚠️ Something went wrong. Please try again."}
+              </div>
+            )}
+
+            <input
+              type="text"
+              placeholder="Subject"
+              required
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
+            />
+
             <input
               type="text"
               placeholder="Your Name"
@@ -62,6 +118,7 @@ const ContactSection = () => {
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
             />
+
             <input
               type="email"
               placeholder="Your Email"
@@ -70,6 +127,7 @@ const ContactSection = () => {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm"
             />
+
             <textarea
               placeholder="Your Message"
               required
@@ -78,11 +136,14 @@ const ContactSection = () => {
               onChange={(e) => setForm({ ...form, message: e.target.value })}
               className="w-full px-4 py-3 rounded-lg bg-secondary border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 transition-colors text-sm resize-none"
             />
+
             <button
               type="submit"
-              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-display font-semibold text-lg hover:opacity-90 transition-opacity glow-accent flex items-center justify-center gap-2"
+              disabled={isSending}
+              className="w-full py-3 rounded-lg bg-primary text-primary-foreground font-display font-semibold text-lg hover:opacity-90 transition-opacity glow-accent flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              <Send size={18} /> Hire Me
+              <Send size={18} />
+              {isSending ? "Sending..." : "Hire Me"}
             </button>
           </form>
         </div>
