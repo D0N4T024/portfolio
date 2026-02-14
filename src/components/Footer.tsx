@@ -11,9 +11,13 @@ const Footer = () => {
 
         <div className="flex items-center gap-6">
           {["Home", "About", "Experience", "Projects", "Contact"].map((l) => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="text-xs text-muted-foreground hover:text-primary transition-colors">
+            <button
+              type="button"
+              onClick={() => document.getElementById(`${l.toLowerCase()}`)?.scrollIntoView({ behavior: "smooth" })}
+              className="text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
               {l}
-            </a>
+            </button>
           ))}
         </div>
 

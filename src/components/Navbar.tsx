@@ -3,12 +3,12 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "home" },
+  { label: "About", href: "about" },
+  { label: "Experience", href: "experience" },
+  { label: "Skills", href: "skills" },
+  { label: "Projects", href: "projects" },
+  { label: "Contact", href: "contact" },
 ];
 
 const Navbar = () => {
@@ -28,27 +28,33 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-        <a href="#home" className="font-display text-xl font-bold text-gradient">
+        <button
+          type="button"
+          onClick={() => document.getElementById("home")?.scrollIntoView({ behavior: "smooth" })}
+          className="font-display text-xl font-bold text-gradient"
+        >
           DMS
-        </a>
+        </button>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <a
+          {navLinks.map((l) => (            
+            <button
               key={l.href}
-              href={l.href}
+              type="button"
+              onClick={() => document.getElementById(l.href)?.scrollIntoView({ behavior: "smooth" })}
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               {l.label}
-            </a>
+            </button>
           ))}
-          <a
-            href="#contact"
+          <button
+            type="button"
+            onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
             className="text-sm font-semibold px-5 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
           >
-            Hire Me
-          </a>
+            Hire me
+          </button>
         </div>
 
         {/* Mobile toggle */}

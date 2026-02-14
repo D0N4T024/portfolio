@@ -61,18 +61,20 @@ const HeroSection = () => {
             learning and growth in the technology field.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a
-              href="#projects"
+            <button
+              type="button"
+              onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
               className="px-6 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-opacity glow-accent"
             >
               View Projects
-            </a>
-            <a
-              href="#contact"
+            </button>
+            <button
+              type="button"
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
               className="px-6 py-3 rounded-lg border border-border text-foreground font-semibold hover:border-primary/50 hover:text-primary transition-colors"
             >
               Contact Me
-            </a>
+            </button>
           </div>
         </motion.div>
 
