@@ -1,16 +1,21 @@
 import { motion } from "framer-motion";
-import { Palette, Globe, Users, Database, Shield } from "lucide-react";
+import { Palette, Globe, Users, Database, Shield, TabletSmartphoneIcon } from "lucide-react";
 
 const services = [
+  {
+    title: "Web Development",
+    icon: Globe,
+    description: "Modern web applications with React & Next.js, scalable backend systems, and full-stack architecture.",
+  },
   {
     title: "UX/UI Design",
     icon: Palette,
     description: "User-centered design, wireframes & prototypes in Figma, and interface optimization for delightful experiences.",
   },
   {
-    title: "Web Development",
-    icon: Globe,
-    description: "Modern web applications with React & Next.js, scalable backend systems, and full-stack architecture.",
+    title: "Mobile Development",
+    icon: TabletSmartphoneIcon,
+    description: "Cross-platform and native mobile applications using React Native and modern mobile frameworks.",
   },
   {
     title: "Project Management",

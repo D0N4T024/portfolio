@@ -11,7 +11,7 @@ const experiences = [
       "Development of critical components",
       "Sprint coordination & delivery planning",
       "Developer mentoring & code reviews",
-      "External integrations leadership",
+      "Project supervision",
       "Performance optimization & scalability",
       "Strategic technical decisions",
     ],

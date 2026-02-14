@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
-import { Code, Database, GitBranch, Palette, Layout, Cpu, BarChart3, Globe, Terminal } from "lucide-react";
+import { Code, Database, GitBranch, Palette, Layout, Cpu, BarChart3, Globe, Terminal, TabletSmartphoneIcon } from "lucide-react";
 
 const stack = [
   { name: "Python", icon: Terminal },
   { name: "React", icon: Layout },
+  { name: "React Native", icon: TabletSmartphoneIcon },
   { name: "Next.js", icon: Globe },
   { name: "SQL", icon: Database },
   { name: "Git", icon: GitBranch },

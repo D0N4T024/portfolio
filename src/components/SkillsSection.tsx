@@ -3,13 +3,13 @@ import { Code, Users, Cpu, Palette, GitBranch, Database, BarChart3, BrainCircuit
 
 const technicalSkills = [
   { name: "Python", icon: Code },
-  { name: "JavaScript / TypeScript", icon: Code },
+  { name: "JavaScript", icon: Code },
   { name: "React / Next.js", icon: Layout },
   { name: "C# ASP.NET", icon: Cpu },
   { name: "HTML / CSS", icon: Palette },
   { name: "SQL & DBA", icon: Database },
   { name: "Ignition SCADA", icon: BarChart3 },
-  { name: "Git", icon: GitBranch },
+  { name: "Git / Github", icon: GitBranch },
 ];
 
 const professionalSkills = [
@@ -17,7 +17,7 @@ const professionalSkills = [
   { name: "Agile Methodologies", icon: BrainCircuit },
   { name: "Technical Leadership", icon: Users },
   { name: "System Architecture", icon: Cpu },
-  { name: "UX/UI Design (Figma)", icon: Palette },
+  { name: "UX/UI Design", icon: Palette },
 ];
 
 const SkillsSection = () => {

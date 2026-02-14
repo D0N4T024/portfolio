@@ -3,9 +3,19 @@ import { GraduationCap, Award } from "lucide-react";
 
 const education = [
   {
+    school: "Open English",
+    degree: "Business English",
+    period: "Jan 2026 – In Progress",
+  },
+  {
     school: "Instituto Tecnológico de Santo Domingo (INTEC)",
     degree: "Software Engineering",
     period: "Oct 2021 – Jan 2025",
+  },
+  {
+    school: "Instituto Cultural Dominico Americano",
+    degree: "English - Advanced Level",
+    period: "",
   },
   {
     school: "Centro Educativo Cristiano",
